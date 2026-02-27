@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAIT Heritage Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">MAIT History Quiz</div>
+      <nav>
+        <a href="admin.html" class="admin-link">Admin Portal</a>
+      </nav>
+    </header>
+
+    <main id="quiz-app">
+      <section
+        class="card"
+        id="quiz-container"
+        role="region"
+        aria-live="polite"
+      >
+        <div class="progress-wrapper">
+          <div class="progress-bar" id="progress"></div>
+        </div>
+
+        <div class="quiz-header">
+          <h1 id="question-text">Loading...</h1>
+          <div id="timer">15s</div>
+        </div>
+
+        <div class="options-grid" id="options">
+          <button class="opt-btn" onclick="handleSelect(0)"></button>
+          <button class="opt-btn" onclick="handleSelect(1)"></button>
+          <button class="opt-btn" onclick="handleSelect(2)"></button>
+          <button class="opt-btn" onclick="handleSelect(3)"></button>
+        </div>
+
+        <section id="feedback" class="feedback-box hidden">
+          <h3 id="feedback-status"></h3>
+          <p id="explanation"></p>
+        </section>
+
+        <button id="next-btn" class="action-btn hidden" onclick="loadNext()">
+          Next Question
+        </button>
+      </section>
+
+      <section id="results" class="card hidden">
+        <div class="icon">🏆</div>
+        <h2>Quiz Finished!</h2>
+        <p id="final-score"></p>
+        <button class="action-btn" onclick="location.reload()">
+          Retake Quiz
+        </button>
+      </section>
+    </main>
+
+    <script src="quiz.js"></script>
+  </body>
+</html>

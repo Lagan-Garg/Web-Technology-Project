@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MAIT Admin - Manage Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Admin Management</div>
+      <a href="index.html" style="color: white">Back to Quiz</a>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Add New Question</h2>
+        <form id="admin-form">
+          <div class="input-group">
+            <input
+              type="text"
+              id="admin-q"
+              placeholder="Enter Question"
+              required
+            />
+            <input type="text" id="a0" placeholder="Option 1" required />
+            <input type="text" id="a1" placeholder="Option 2" required />
+            <input type="text" id="a2" placeholder="Option 3" required />
+            <input type="text" id="a3" placeholder="Option 4" required />
+            <select id="correct-ans">
+              <option value="0">Option 1 is Correct</option>
+              <option value="1">Option 2 is Correct</option>
+              <option value="2">Option 3 is Correct</option>
+              <option value="3">Option 4 is Correct</option>
+            </select>
+            <textarea
+              id="admin-f"
+              placeholder="Brief Explanation/Fun Fact"
+            ></textarea>
+          </div>
+          <button type="submit" class="action-btn">Add to Database</button>
+        </form>
+        <hr style="margin: 20px 0" />
+        <button
+          onclick="clearDB()"
+          class="action-btn"
+          style="background: #ef4444"
+        >
+          Clear All Custom Questions
+        </button>
+      </section>
+    </main>
+
+    <script>
+      // Check password on entry
+      const pass = prompt("Enter Admin Password:");
+      if (pass !== "admin123") {
+        alert("Unauthorized!");
+        window.location.href = "index.html";
+      }
+
+      document.getElementById("admin-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        let data = JSON.parse(localStorage.getItem("mait_db")) || [];
+        const newQ = {
+          q: document.getElementById("admin-q").value,
+          a: [
+            document.getElementById("a0").value,
+            document.getElementById("a1").value,
+            document.getElementById("a2").value,
+            document.getElementById("a3").value,
+          ],
+          c: parseInt(document.getElementById("correct-ans").value),
+          f: document.getElementById("admin-f").value,
+        };
+        data.push(newQ);
+        localStorage.setItem("mait_db", JSON.stringify(data));
+        alert("Question Saved!");
+        e.target.reset();
+      });
+
+      function clearDB() {
+        if (confirm("Are you sure?")) localStorage.removeItem("mait_db");
+      }
+    </script>
+  </body>
+</html>
